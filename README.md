@@ -73,33 +73,103 @@ Here is our design diagram:
 
 ![img.png](src/images/decorator.png)
 
-In package decorator, 
+In package decorator, we have three component classes for now: Condo, Townhouse and House.
+Each of them has a unique description and price. Note that we are completely flexible to expand
+or delete these component classes, without changing the behaviors of other classes. Such property
+fulfills our needs as a fast-growing company. Here is a code example of Townhouse class:
 
-````
+````````
 package decorator;
 
 /**
  * represents a Townhouse product.
  */
-
 public class Townhouse extends RealEstate {
 
-/**
- * constructs a Townhouse product.
- */
- 
-    public Townhouse(){
-    
-        this.description = "Townhouse";
-    }
+  /**
+   * constructs a Townhouse product.
+   */
+  public Townhouse(){
+    this.description = "Townhouse";
+  }
 
-@Override
-    public int getPrice() {
-    
-        return 1500000;
-    }
+  @Override
+  public int getPrice() {
+    return 1500000;
+  }
 }
-````
+````````
+In addition, we have an abstract decorator class RealEstateDecorator, which not only is a RealEstate,
+but also has a RealEstate as a field. There are three concrete decorator classes inherited from it at 
+present: Light, Floor and Fridge. None of them is dependent on other classes. Here is a code example of Floor class:
+
+````````
+package decorator;
+
+/**
+ * represent a real estate with floor decoration.
+ */
+public class Floor extends RealEstateDecorator {
+
+  /**
+   * provides a real estate with floor decoration.
+   *
+   * @param realEstate a real estate product.
+   */
+  public Floor(RealEstate realEstate){
+    this.realEstate = realEstate;
+  }
+
+  @Override
+  public String getDescription() {
+    return this.realEstate.getDescription() + ", floor";
+  }
+
+  @Override
+  public int getPrice() {
+    return this.realEstate.getPrice() + 10000;
+  }
+}
+````````
+The constructor takes in a RealEstate argument and wrap it with itself: the floor. 
+The getDescription() method appends a short description of the floor to the description
+of the real estate, and the getPrice() method adds its own price to the original price.
+
+Now, everything seems to be set. We are ready to wrap some components dynamically at runtime with decorators.
+Let's move to src/decorator/AwesomeRealEstate, which is our driver class. The first client wants to buy 
+a house without any decoration, while the second and third clients would like to bundle a townhouse or
+condo with some kinds of decorations from us. We will create instances according to their requests as follows:
+
+````````
+package decorator;
+
+public class AwesomeRealEstate {
+
+  public static void main(String[] args){
+
+    RealEstate house = new House();
+    System.out.println(house.getDescription() + ": $" + house.getPrice());
+
+    RealEstate townhouse = new Townhouse();
+    townhouse = new Floor(townhouse);
+    townhouse = new Light(townhouse);
+    System.out.println(townhouse.getDescription() + ": $" + townhouse.getPrice());
+
+    RealEstate condo = new Condo();
+    condo = new Fridge(condo);
+    condo = new Fridge(condo);
+    System.out.println(condo.getDescription() + ": $" + condo.getPrice());
+  }
+
+}
+````````
+It provides us with the descriptions and prices:
+````````
+House: $2000000
+Townhouse, floor, light: $1515000
+Condo, fridge, fridge: $806000
+````````
+
 
 
 

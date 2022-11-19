@@ -10,7 +10,7 @@
 ...
 add base case diagram here
 
-## Designing Decorators
+## Designing Decorations
 
 ### **1. Initial Attempt**
 add comments here...
@@ -42,5 +42,7 @@ For example, if a customer wants to bundle a Townhouse with Floor and Light, we 
 Here is our design diagram:
 
 ![img.png](src/images/decorator.png)
+
+## Please add some conceptual explanations here.
 
 

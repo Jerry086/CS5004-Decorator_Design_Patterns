@@ -38,14 +38,14 @@ add base case diagram here
 
 ...add comments here
 
-### **2. Some Improvements**
+#### **2. Some Improvements**
 ...add comments here
 
 ![img.png](src/images/img.png)
 
 ...add comments here
 
-### **3. Decorator Pattern!!!**
+#### **3. Decorator Pattern!!!**
 Now we have seen that representing our real estate and decorations with inheritance does not seem to be appropriate.
 It introduces problems such as class explosions and rigid designs, or we add many methods to the base class that is
 not necessary for some subclasses. Those designs violate SOLID principle. It's time to think about altering it to
@@ -61,7 +61,7 @@ Source:https://learning.oreilly.com/library/view/learning-javascript-design/9781
 2. Each component can be used on its own or “wrapped” by a component
 3. Each decorator “has-a” (wrap) a component, meaning it has an instance variable that holds a reference to a component.
 
-We will perform the following: starting with a real estate and decorate it with the decorations at run time.
+We will perform the following: starting with a real estate and decorate it with the decorations at runtime.
 For example, if a customer wants to bundle a Townhouse with Floor and Light, we will:
 
 1. Start with a Townhouse object.
@@ -72,6 +72,28 @@ For example, if a customer wants to bundle a Townhouse with Floor and Light, we 
 Here is our design diagram:
 
 ![img.png](src/images/decorator.png)
+
+In package decorator, 
+
+package decorator;
+
+/**
+* represents a Townhouse product.
+  */
+  public class Townhouse extends RealEstate {
+
+/**
+* constructs a Townhouse product.
+  */
+  public Townhouse(){
+  this.description = "Townhouse";
+  }
+
+@Override
+public int getPrice() {
+return 1500000;
+}
+}
 
 
 

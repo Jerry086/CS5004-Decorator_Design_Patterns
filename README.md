@@ -18,32 +18,32 @@
 3. The decorator adds its own behavior before and/or after delegating to the object it decorates to do the rest of the job - Single Responsibility Principle
 4. Objects can be decorated at any time, so we can decorate objects dynamically at runtime with as many decorators as we like.
 
-...feel free to add
-
 ## A Real-Life Problem
 
-...describe the story of our company here
+Welcome to Awesome Real Estate! We are the fastest-growing real estate company located in Vancouver. We help clients buy three types of real estate, condos, townhouses, and houses. When we initially started our company, this was our idea of class design. We created an abstract class RealEstate, and three subclasses to represent the three types of real estate we are selling.
 
-### Designing a Base Case
 
-...
-add base case diagram here
+![img.png](src/images/base%20case.png)
 
+As a growing and innovative real estate company, we created our unique Decorating Home Program, which enables us to provide clients with house-decorating services. As we are just beginning our program, the three decoration options we currently provide are light, fridge, and floor.
 ### Designing Decorations
 
 #### **1. Initial Attempt**
-...add comments here
+As we add house-decorating services to our business, we need to put each type of decoration and its price in our system. Here’s our first attempt.
 
 ![img_1.png](src/images/Initial%20Attempt.png)
 
-...add comments here
+For every potential combination of a real estate type and a decoration, a subclass is made. We undoubtedly caused a class explosion with this design.
 
 #### **2. Some Improvements**
-...add comments here
+How about we add the decoration-related fields and methods in the abstract class that subclasses can inherit?
 
 ![img.png](src/images/img.png)
 
-...add comments here
+We can still see problems in this design as this design breaks the SOLID principle.
+1. Our existing code needs to be altered if we add a new decorating service. This violates the open-closed principle.
+2. We use the same abstract class to represent both real estate and decorations. This violates the single-responsibility principle.
+
 
 #### **3. Decorator Pattern!!!**
 Now we have seen that representing our real estate and decorations with inheritance does not seem to be appropriate.
@@ -137,7 +137,7 @@ of the real estate, and the getPrice() method adds its own price to the original
 
 Now, everything seems to be set. We are ready to wrap some components dynamically at runtime with decorators.
 Let's move to src/decorator/AwesomeRealEstate, which is our driver class. The first client wants to buy 
-a house without any decoration, while the second and third clients would like to bundle a townhouse or
+a house without any decoration, whereas the second and third clients would like to bundle a townhouse or
 condo with some kinds of decorations from us. We will create instances according to their requests as follows:
 
 ````````
@@ -169,7 +169,8 @@ House: $2000000
 Townhouse, floor, light: $1515000
 Condo, fridge, fridge: $806000
 ````````
-
+Great! We build a framework that fulfills our needs. Our problems are solved and we are looking forward
+to extending our business : )
 
 
 
